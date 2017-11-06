@@ -10,7 +10,7 @@ public class App {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		System.out.println("å¥½å¥½danger");
+		System.out.println("111µÄdanger");
 	ApplicationContext context = new ClassPathXmlApplicationContext("classpath:beans.xml");
 		ExcelUtils s = (ExcelUtils) context.getBean("excelUtils");
 	s.getExcelToSqlbase();
