@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.offcn.dao.MobilenumMapper" >
+  <resultMap id="BaseResultMap" type="com.offcn.po.Mobilenum" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="MobileNumber" property="mobilenumber" jdbcType="VARCHAR" />
+    <result column="MoblieArea" property="mobliearea" jdbcType="VARCHAR" />
+    <result column="MobileType" property="mobiletype" jdbcType="VARCHAR" />
+    <result column="AreaCode" property="areacode" jdbcType="VARCHAR" />
+    <result column="PostCode" property="postcode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, MobileNumber, MoblieArea, MobileType, AreaCode, PostCode
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.offcn.po.MobilenumExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mobilenum
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from mobilenum
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+   <select id="selectByMobileNumber" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from mobilenum
+    where MobileNumber = #{MobileNumber,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from mobilenum
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.offcn.po.MobilenumExample" >
+    delete from mobilenum
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.offcn.po.Mobilenum" >
+    insert into mobilenum (ID, MobileNumber, MoblieArea, 
+      MobileType, AreaCode, PostCode
+      )
+    values (#{id,jdbcType=INTEGER}, #{mobilenumber,jdbcType=VARCHAR}, #{mobliearea,jdbcType=VARCHAR}, 
+      #{mobiletype,jdbcType=VARCHAR}, #{areacode,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.offcn.po.Mobilenum" >
+    insert into mobilenum
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="mobilenumber != null" >
+        MobileNumber,
+      </if>
+      <if test="mobliearea != null" >
+        MoblieArea,
+      </if>
+      <if test="mobiletype != null" >
+        MobileType,
+      </if>
+      <if test="areacode != null" >
+        AreaCode,
+      </if>
+      <if test="postcode != null" >
+        PostCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mobilenumber != null" >
+        #{mobilenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="mobliearea != null" >
+        #{mobliearea,jdbcType=VARCHAR},
+      </if>
+      <if test="mobiletype != null" >
+        #{mobiletype,jdbcType=VARCHAR},
+      </if>
+      <if test="areacode != null" >
+        #{areacode,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.offcn.po.MobilenumExample" resultType="java.lang.Integer" >
+    select count(*) from mobilenum
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mobilenum
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mobilenumber != null" >
+        MobileNumber = #{record.mobilenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobliearea != null" >
+        MoblieArea = #{record.mobliearea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobiletype != null" >
+        MobileType = #{record.mobiletype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areacode != null" >
+        AreaCode = #{record.areacode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postcode != null" >
+        PostCode = #{record.postcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mobilenum
+    set ID = #{record.id,jdbcType=INTEGER},
+      MobileNumber = #{record.mobilenumber,jdbcType=VARCHAR},
+      MoblieArea = #{record.mobliearea,jdbcType=VARCHAR},
+      MobileType = #{record.mobiletype,jdbcType=VARCHAR},
+      AreaCode = #{record.areacode,jdbcType=VARCHAR},
+      PostCode = #{record.postcode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.offcn.po.Mobilenum" >
+    update mobilenum
+    <set >
+      <if test="mobilenumber != null" >
+        MobileNumber = #{mobilenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="mobliearea != null" >
+        MoblieArea = #{mobliearea,jdbcType=VARCHAR},
+      </if>
+      <if test="mobiletype != null" >
+        MobileType = #{mobiletype,jdbcType=VARCHAR},
+      </if>
+      <if test="areacode != null" >
+        AreaCode = #{areacode,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        PostCode = #{postcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.offcn.po.Mobilenum" >
+    update mobilenum
+    set MobileNumber = #{mobilenumber,jdbcType=VARCHAR},
+      MoblieArea = #{mobliearea,jdbcType=VARCHAR},
+      MobileType = #{mobiletype,jdbcType=VARCHAR},
+      AreaCode = #{areacode,jdbcType=VARCHAR},
+      PostCode = #{postcode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
