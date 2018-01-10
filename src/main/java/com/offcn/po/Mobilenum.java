@@ -12,6 +12,8 @@ public class Mobilenum {
     private String areacode;
 
     private String postcode;
+	
+	  private String postcodes;
 
     public Integer getId() {
         return id;
